@@ -40,7 +40,11 @@ public static void main(String[] args) {
                             }
                             break;
                         case 3:
-                            JOptionPane.showMessageDialog(null,"h","",JOptionPane.INFORMATION_MESSAGE);
+                            o5=Integer.parseInt(JOptionPane.showInputDialog(null,"Se ha retirado: "+d+"\nfecha: "+fecha+"\n1.-Volver\n2.-Salir","Movimientos recientes",JOptionPane.INFORMATION_MESSAGE));
+                            if(o5==2){
+                                System.exit(0);
+                            }
+                            break;
                         case 4:
                             JOptionPane.showMessageDialog(null,"Gracias por su visita","",JOptionPane.INFORMATION_MESSAGE);
                             System.exit(0);
