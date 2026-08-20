@@ -1,0 +1,54 @@
+Tabla de info				Tabla de actividades			Tabla Personal
+IdContratista				IdActividades			IdPersonal
+Nombre				ActividadesRealizar			Nombre
+NombreComercial				AreaDeTrabajo			Apellidos
+RegPatronal				SolicitantesKCM			Cargo
+ActImss				Actividad	Lista desplegable		Actividad
+SCIAN				IdContartista	FK		# IMSS
+ClaseRiesgo							Dirección
+DomicilioEmp							CURP
+RFC							Telefono
+MesIngreso							IdContratistaFK
+Capital							
+CamPatronal							
+Sindicato							
+PrimaRiesgo							
+DomicilioFisc							
+Dimensiones							
+FechaRegistro							
+----------------------------------
+Nombre, denominación o razón social	ok		Cntr_Datos	Cntr_Datos_Contables	Cntr_Datos_Seguro	Cntr_Actividades
+Nombre comercial	ok		IdContratistas	RazonSocial	RegistroPatronal	AccesoPlanta
+Registro patronal	ok		NombreComercial	RFC	ActividadImss	DimensionesCons
+Actividad ante el IMSS	ok		CamaraPatronal*	DomicilioFiscal	ClaseRiesgo*	Actividades
+Actividad ante SCIAN	*		ActividadScian*	PrimaRiesgo*		AreaTrabajo
+Clase de riesgo	*		Domicilio	CapitalContable		ActividadesEnPlanta
+Domicilio de la empresa	ok		TipoEstablecimiento*			DiasLaborados
+Tipo de establecimiento	*		Nombre			
+RFC	ok		Apellido			
+Solicitud ed acceso a planta durante el mes de	ok		Telefono			
+Capital contable	ok		Correo			
+Camara patronal	*		PersonalRegistrado			
+Prima de riesgo	*		SolicitantesKCM*			
+Domicilio fiscal	ok					
+Dimensiones de construccion y superficie (en m2)	ok					
+Actividades a realizar	ok					
+Area (s) donde se realizara el trabajo	ok					
+Total de dias laborados durante el nes	ok					
+Solicitante (s) de KCM que asigno los trabajos realizados	*					
+Total personal registrado	ok					
+Total hombres	Conteo automatico?					
+Total mujeres	Conteo automatico?					
+Datos de contacto con la compañía contratista	ok					
+Actividades a realizar en planta (CheckBox)	ok					
+---------------------------------------
+Nombre Completo		Cntr_Trabajador	Cntr_Datos_Per
+Puesto/Cargo		IdTrabajador (PK)	IdTrabajador (FK)
+Actividad que realiza		Nombre	NumImss
+N° IMSS		ApellidoP	Direccion
+Dirección		ApellidoM	CURP
+CURP		Cargo	Telefono
+Telefono		Actividad	
+		IdContratista (FK)	
++
+
