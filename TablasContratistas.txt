@@ -1,0 +1,154 @@
+-- =========================================================
+-- Script de creación de tablas para SSMS (SQL Server)
+-- =========================================================
+
+USE [NombreDeTuBaseDeDatos]; -- Reemplaza por el nombre real de tu base de datos
+GO
+
+-- ---------------------------------------------------------
+-- Tabla 1: Cntr_Trabajador
+-- ---------------------------------------------------------
+IF OBJECT_ID('dbo.Cntr_Trabajador', 'U') IS NOT NULL
+    DROP TABLE dbo.Cntr_Trabajador;
+GO
+
+CREATE TABLE dbo.Cntr_Trabajador
+(
+    IdTrabajador    INT IDENTITY(1,1) NOT NULL,
+    Nombre          NVARCHAR(100)     NOT NULL,
+    ApellidoP       NVARCHAR(100)     NOT NULL,
+    ApellidoM       NVARCHAR(100)     NULL,
+    Cargo           NVARCHAR(100)     NULL,
+    Actividad       NVARCHAR(200)     NULL,
+    IdContratista   INT               NOT NULL,
+
+    CONSTRAINT PK_Cntr_Trabajador PRIMARY KEY (IdTrabajador)
+    -- Si tienes la tabla de Contratistas, descomenta y ajusta la siguiente línea:
+    -- , CONSTRAINT FK_Cntr_Trabajador_Contratista FOREIGN KEY (IdContratista)
+    --     REFERENCES dbo.Cntr_Contratista (IdContratista)
+);
+GO
+
+-- ---------------------------------------------------------
+-- Tabla 2: Cntr_Datos_Per
+-- ---------------------------------------------------------
+IF OBJECT_ID('dbo.Cntr_Datos_Per', 'U') IS NOT NULL
+    DROP TABLE dbo.Cntr_Datos_Per;
+GO
+
+CREATE TABLE dbo.Cntr_Datos_Per
+(
+    Trabajador      INT IDENTITY(1,1) NOT NULL,
+    IdTrabajador    INT               NOT NULL,
+    NumImss         NVARCHAR(20)      NULL,
+    Direccion       NVARCHAR(250)     NULL,
+    CURP            NVARCHAR(18)      NULL,
+    Telefono        NVARCHAR(20)      NULL,
+
+    CONSTRAINT PK_Cntr_Datos_Per PRIMARY KEY (Trabajador),
+    CONSTRAINT FK_Cntr_Datos_Per_Trabajador FOREIGN KEY (IdTrabajador)
+        REFERENCES dbo.Cntr_Trabajador (IdTrabajador)
+);
+GO
+
+---------------------------------------------------
+-- =========================================================
+-- Script de creación de tablas para SSMS (SQL Server)
+-- =========================================================
+
+USE [NombreDeTuBaseDeDatos]; -- Reemplaza por el nombre real de tu base de datos
+GO
+
+-- ---------------------------------------------------------
+-- Tabla 1: Cntr_Datos
+-- ---------------------------------------------------------
+IF OBJECT_ID('dbo.Cntr_Datos', 'U') IS NOT NULL
+    DROP TABLE dbo.Cntr_Datos;
+GO
+
+CREATE TABLE dbo.Cntr_Datos
+(
+    IdContratistas      INT IDENTITY(1,1) NOT NULL,
+    NombreComercial      NVARCHAR(150)     NULL,
+    CamaraPatronal        NVARCHAR(150)     NULL,
+    ActividadScian        NVARCHAR(150)     NULL,
+    Domicilio             NVARCHAR(250)     NULL,
+    TipoEstablecimiento   NVARCHAR(100)     NULL,
+    Nombre                NVARCHAR(100)     NULL,
+    Apellido              NVARCHAR(100)     NULL,
+    Telefono              NVARCHAR(20)      NULL,
+    Correo                NVARCHAR(150)     NULL,
+    PersonalRegistrado    INT               NULL,
+    SolicitantesKCM       NVARCHAR(150)     NULL,
+
+    CONSTRAINT PK_Cntr_Datos PRIMARY KEY (IdContratistas)
+);
+GO
+
+-- ---------------------------------------------------------
+-- Tabla 2: Cntr_Datos_Contables
+-- ---------------------------------------------------------
+IF OBJECT_ID('dbo.Cntr_Datos_Contables', 'U') IS NOT NULL
+    DROP TABLE dbo.Cntr_Datos_Contables;
+GO
+
+CREATE TABLE dbo.Cntr_Datos_Contables
+(
+    IdDatosContables  INT IDENTITY(1,1) NOT NULL, -- PK autonumérica (no especificaste una)
+    RazonSocial       NVARCHAR(150)     NULL,
+    RFC               NVARCHAR(13)      NULL,
+    DomicilioFiscal   NVARCHAR(250)     NULL,
+    PrimaRiesgo       DECIMAL(5,2)      NULL,
+    CapitalContable   DECIMAL(18,2)     NULL,
+    IdContratistas    INT               NOT NULL,
+
+    CONSTRAINT PK_Cntr_Datos_Contables PRIMARY KEY (IdDatosContables),
+    CONSTRAINT FK_Cntr_Datos_Contables_Contratistas FOREIGN KEY (IdContratistas)
+        REFERENCES dbo.Cntr_Datos (IdContratistas)
+);
+GO
+
+-- ---------------------------------------------------------
+-- Tabla 3: Cntr_Datos_Seguro
+-- ---------------------------------------------------------
+IF OBJECT_ID('dbo.Cntr_Datos_Seguro', 'U') IS NOT NULL
+    DROP TABLE dbo.Cntr_Datos_Seguro;
+GO
+
+CREATE TABLE dbo.Cntr_Datos_Seguro
+(
+    IdDatosSeguro     INT IDENTITY(1,1) NOT NULL, -- PK autonumérica (no especificaste una)
+    RegistroPatronal  NVARCHAR(50)      NULL,
+    ActividadImss     NVARCHAR(150)     NULL,
+    ClaseRiesgo       NVARCHAR(50)      NULL,
+    IdContratistas    INT               NOT NULL,
+
+    CONSTRAINT PK_Cntr_Datos_Seguro PRIMARY KEY (IdDatosSeguro),
+    CONSTRAINT FK_Cntr_Datos_Seguro_Contratistas FOREIGN KEY (IdContratistas)
+        REFERENCES dbo.Cntr_Datos (IdContratistas)
+);
+GO
+
+-- ---------------------------------------------------------
+-- Tabla 4: Cntr_Actividades
+-- ---------------------------------------------------------
+IF OBJECT_ID('dbo.Cntr_Actividades', 'U') IS NOT NULL
+    DROP TABLE dbo.Cntr_Actividades;
+GO
+
+CREATE TABLE dbo.Cntr_Actividades
+(
+    IdActividades         INT IDENTITY(1,1) NOT NULL, -- PK autonumérica (no especificaste una)
+    AccesoPlanta          NVARCHAR(150)     NULL,
+    DimensionesCons       NVARCHAR(150)     NULL,
+    Actividades           NVARCHAR(250)     NULL,
+    AreaTrabajo           NVARCHAR(150)     NULL,
+    ActividadesEnPlanta   NVARCHAR(250)     NULL,
+    DiasLaborados         NVARCHAR(100)     NULL,
+    IdContratistas        INT               NOT NULL,
+
+    CONSTRAINT PK_Cntr_Actividades PRIMARY KEY (IdActividades),
+    CONSTRAINT FK_Cntr_Actividades_Contratistas FOREIGN KEY (IdContratistas)
+        REFERENCES dbo.Cntr_Datos (IdContratistas)
+);
+GO
