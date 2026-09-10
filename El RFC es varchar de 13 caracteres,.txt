@@ -1,0 +1,7 @@
+El "RFC" es varchar de 13 caracteres, si no ocupa los 13 caracteres, borra el caracter que este vacio o contenga espacio
+
+El "Telefono" es un entero de 10 digitos
+
+"Personal registrado" es un entero de 4 digitos, puede ir de 1 a 9999, pero no puede ser 0
+
+"Prima de riesgo" es un float con 5 decimales
